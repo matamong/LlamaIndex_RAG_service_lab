@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend-dev
+    ports:
+      - '8000:8000'
+    image: backend-dev
+    working_dir: /app
+    volumes:
+      - ./backend/app:/app
+      - ./backend_log_config.ini:/app/backend_log_config.ini
+    command: /bin/bash -c "poetry lock --no-update && poetry install && poetry run uvicorn --app-dir /app/app main:app --host 0.0.0.0 --port 8000 --log-config /app/backend_log_config.ini --log-level info --reload"
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_ENDPOINT=${DB_ENDPOINT}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - TZ=Asia/Seoul
+      - ENVIRONMENT=${ENVIRONMENT}
+      - LOG_LEVEL=${LOG_LEVEL}
+    networks:
+      - main-bridge
+networks:
+  main-bridge:
+    external: true # You should create this network before running the docker-compose file
