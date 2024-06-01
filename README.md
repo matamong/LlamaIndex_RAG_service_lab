@@ -15,29 +15,56 @@ poetry env info --path
   - `python.pythonPath` is at setting - search `venv`
 reference: https://stackoverflow.com/questions/59882884/vscode-doesnt-show-poetry-virtualenvs-in-select-interpreter-option
 
-<br>
+<br><br>
 
 # How to run
 ## 1. Create `.env.dev`
-- 1. Refer to .env.template to create `.env.dev` in the root directory.
-## 2. Build the images.
+You must write the `.env.dev` file as it controls the overall environment variables. <br>
+Here is how you can do it.
+- 1. Create `.env.dev` in the root directory.
+- 2. Write the `.env.dev` file. Make sure to refer to the `.env.template` file when writing it.
+
+## 2. Init Backend & Run Backend
+`Makefile` makes it easy to initialize backend. <br>
+It automates building images, create docker compose network.
+
+### Init backend
+```shell
+make init_backend
+```
+### Run backend
+```shell
+make run_backend
+make down_backend <- it down the backend container
+```
+
+<br><br>
+
+# Detail running proccessing
+## 1. build the images
 There are two methods for building images: the basic way and the Makefile way.
 ### A. Basic
 - In ./backend,
 ```shell
-docker build -t backend-dev:python -f backend.dockerfile .
+docker build -t rag_backend:0.1 -f backend.dockerfile .
 ```
 ### B. Makefile
 - In root dir
 ```shell
 make build_backend
 ```
-## 3. Create docker network
-- default network name is `main-bridge`
+## 2. Create docker network
+You have to set docker compose network name in `.env.dev`.
+
+### A. Basic
 ``` shell
-docker network create main-bridge
+docker network create {network_name}
 ```
-## 4. compose up
+### B. Makefile
+```shell
+make create_network
+```
+## 3. compose up
 There are two methods to launch the compose: the basic way and the Makefile way.
 ### A. Basic
 - In root dir

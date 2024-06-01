@@ -1,10 +1,10 @@
 version: '3.8'
 services:
   backend:
-    container_name: backend-dev
+    container_name: ${BACKEND_CONTAINER_NAME}
     ports:
       - '8000:8000'
-    image: backend-dev
+    image: ${BACKEND_IMAGE_NAME}:${BACKEND_IMAGE_TAG}
     working_dir: /app
     volumes:
       - ./backend/app:/app
@@ -20,7 +20,7 @@ services:
       - ENVIRONMENT=${ENVIRONMENT}
       - LOG_LEVEL=${LOG_LEVEL}
     networks:
-      - main-bridge
+      - main-bridge # It brings `.env.dev` file's DOCKER_COMPOSE_NETWORK_NAME value
 networks:
   main-bridge:
     external: true # You should create this network before running the docker-compose file
