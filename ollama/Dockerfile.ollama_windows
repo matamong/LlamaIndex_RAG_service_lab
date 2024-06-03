@@ -1,0 +1,12 @@
+FROM ollama/ollama
+
+WORKDIR /app
+
+COPY ollama_entrypoint.sh /tmp/ollama_entrypoint.sh
+
+WORKDIR /tmp
+
+RUN chmod +x ollama_entrypoint.sh \ 
+    && ./ollama_entrypoint.sh
+
+EXPOSE 11434
