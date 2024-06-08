@@ -83,5 +83,7 @@ make down_backend
 # Default port
 ## backend
 - 8000:8000
+## ollama
+- 11434:11434
 
 <br>
