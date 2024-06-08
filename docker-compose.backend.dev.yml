@@ -19,8 +19,13 @@ services:
       - TZ=Asia/Seoul
       - ENVIRONMENT=${ENVIRONMENT}
       - LOG_LEVEL=${LOG_LEVEL}
+      - OLLAMA_API_HOST=${OLLAMA_API_HOST}
+      - OLLAMA_API_PORT=${OLLAMA_API_PORT}
+      - OLLAMA_CONTAINER_NAME=${OLLAMA_CONTAINER_NAME}
+      - OLLAMA_SERVICE_NAME=${OLLAMA_SERVICE_NAME}
     networks:
-      - main-bridge # It brings `.env.dev` file's DOCKER_COMPOSE_NETWORK_NAME value
+      - main-bridge
+
 networks:
   main-bridge:
     external: true # You should create this network before running the docker-compose file

@@ -48,5 +48,10 @@ down_all:
 	$(DOCKER_PREFIX) compose --env-file .env.dev -f docker-compose.dev.yml down
 	$(DOCKER_PREFIX) compose --env-file .env.dev -f docker-compose.backend.dev.yml down
 
+run_ollama:
+	$(DOCKER_PREFIX) compose --env-file .env.dev -f docker-compose.ollama.yml up -d
+
+down_ollama:
+	$(DOCKER_PREFIX) compose --env-file .env.dev -f docker-compose.ollama.yml down
 
 init_backend: build_backend create_network
