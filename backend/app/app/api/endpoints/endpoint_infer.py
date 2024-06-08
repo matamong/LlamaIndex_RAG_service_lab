@@ -14,7 +14,7 @@ logger = AppLogger().get_logger()
 
 @router.post("/infer")
 async def generate(request: InferRequest):
-    url = settings.OLLAMA_API_URL
+    url = settings.OLLAMA_INFER_URL
     payload = request.model_dump()
 
     logger.info(f"Sending request to {url} with payload: {payload}")

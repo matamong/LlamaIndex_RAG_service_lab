@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     OLLAMA_SERVICE_NAME: str
 
     @property
-    def OLLAMA_API_URL(self) -> str:
+    def OLLAMA_INFER_URL(self) -> str:
         return f'http://{self.OLLAMA_SERVICE_NAME}:{self.OLLAMA_API_PORT}/api/generate'
     @property
     def OLLAMA_URL(self) -> str:
