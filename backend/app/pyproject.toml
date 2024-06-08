@@ -6,7 +6,7 @@ authors = ["matamong <matamatamong@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 fastapi = {extras = ["all"], version = "^0.110.0"}
 sqlalchemy = "^2.0.29"
 asyncpg = "^0.29.0"
