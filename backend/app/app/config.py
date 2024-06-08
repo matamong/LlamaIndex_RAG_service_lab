@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     DB_USERNAME: str
     DB_PASSWORD: str
 
+    # rag data directory
+    RAG_DATA_DIR: str = "/app/data"
+    
     # Logging
     LOG_LEVEL: Literal['DEBUG', 'INFO', 'WARNING', 'ERRO', 'CRITICAL'] = 'DEBUG'
 
@@ -27,6 +30,8 @@ class Settings(BaseSettings):
     @property
     def OLLAMA_API_URL(self) -> str:
         return f'http://{self.OLLAMA_SERVICE_NAME}:{self.OLLAMA_API_PORT}/api/generate'
-
+    @property
+    def OLLAMA_URL(self) -> str:
+        return f'http://{self.OLLAMA_SERVICE_NAME}:{self.OLLAMA_API_PORT}'
 
 settings = Settings()
