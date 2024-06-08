@@ -18,4 +18,15 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: Literal['DEBUG', 'INFO', 'WARNING', 'ERRO', 'CRITICAL'] = 'DEBUG'
 
+    # Ollama API
+    OLLAMA_API_HOST: str
+    OLLAMA_API_PORT: str
+    OLLAMA_CONTAINER_NAME: str
+    OLLAMA_SERVICE_NAME: str
+
+    @property
+    def OLLAMA_API_URL(self) -> str:
+        return f'http://{self.OLLAMA_SERVICE_NAME}:{self.OLLAMA_API_PORT}/api/generate'
+
+
 settings = Settings()
