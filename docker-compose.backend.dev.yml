@@ -1,6 +1,9 @@
 version: '3.8'
 services:
   backend:
+    build:
+      context: .
+      dockerfile: ./backend/backend.dockerfile
     container_name: ${BACKEND_CONTAINER_NAME}
     ports:
       - '8000:8000'
@@ -9,7 +12,7 @@ services:
     volumes:
       - ./backend/app:/app
       - ./backend_log_config.ini:/app/backend_log_config.ini
-    command: /bin/bash -c "poetry lock --no-update && poetry install && poetry run uvicorn --app-dir /app/app main:app --host 0.0.0.0 --port 8000 --log-config /app/backend_log_config.ini --log-level info --reload"
+    command: /bin/bash -c "poetry install --no-root --no-interaction --no-ansi && poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
     environment:
       - DB_NAME=${DB_NAME}
       - DB_ENDPOINT=${DB_ENDPOINT}
