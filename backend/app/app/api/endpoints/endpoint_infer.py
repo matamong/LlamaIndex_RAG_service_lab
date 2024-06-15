@@ -41,10 +41,6 @@ async def generate(request: InferRequest):
 async def llamaindex_test():
     documents = SimpleDirectoryReader("data").load_data()
 
-    Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
-
-    Settings.llm = Ollama(base_url=settings.OLLAMA_URL, model="llama3", request_timeout=10000.0)
-
     index = VectorStoreIndex.from_documents(documents,)
 
     query_engine = index.as_query_engine()
