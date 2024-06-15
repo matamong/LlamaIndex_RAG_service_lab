@@ -1,8 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from httpx import AsyncClient, Timeout, HTTPStatusError, RequestError
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
-from llama_index.llms.ollama import Ollama
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 
 from app.config import settings
 from app.schema.request import InferRequest
