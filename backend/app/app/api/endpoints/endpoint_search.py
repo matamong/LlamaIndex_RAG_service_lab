@@ -8,7 +8,7 @@ router = APIRouter()
 logger = AppLogger().get_logger()
 
 
-@router.get("/search/test")
+@router.get("/test")
 async def search_simple_txt_file():
     documents = SimpleDirectoryReader("data").load_data()
 

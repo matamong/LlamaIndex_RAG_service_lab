@@ -9,7 +9,7 @@ router = APIRouter()
 logger = AppLogger().get_logger()
 
 
-@router.post("/infer")
+@router.post("/chat")
 async def generate(request: InferRequest):
     url = settings.OLLAMA_INFER_URL
     payload = request.model_dump()
