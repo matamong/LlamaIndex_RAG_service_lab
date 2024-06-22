@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from httpx import AsyncClient, Timeout, HTTPStatusError, RequestError
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 
 from app.config import settings
 from app.schema.request import InferRequest
@@ -33,17 +32,3 @@ async def generate(request: InferRequest):
         logger.debug(f"An unexpected error occurred: {str(e)}")
         logger.exception("An unexpected error occurred")
         raise HTTPException(status_code=500, detail="An unexpected error occurred")
-
-
-@router.get("/infer/llamaindex/test")
-async def llamaindex_test():
-    documents = SimpleDirectoryReader("data").load_data()
-
-    index = VectorStoreIndex.from_documents(documents,)
-
-    query_engine = index.as_query_engine()
-    response = query_engine.query("What did the author do growing up?")
-
-    print(response)
-
-    return response
