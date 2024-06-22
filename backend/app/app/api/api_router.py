@@ -6,4 +6,4 @@ api_router = APIRouter()
 
 api_router.include_router(endpoint_ping.router, tags=["ping"])
 api_router.include_router(endpoint_infer.router, prefix="/infer", tags=["infer"])
-api_router.include_router(endpoint_search.router, prefix="/search", tags=["search"])
+api_router.include_router(endpoint_search.router, prefix="/search", tags=["search])
