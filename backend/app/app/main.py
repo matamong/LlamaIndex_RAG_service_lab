@@ -17,7 +17,11 @@ logger = AppLogger().get_logger()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info('[Main] Setting up the app...')
-    
+
+    if settings.OLLAMA_API_HOST and settings.OPENAI_API_KEY:
+        logger.error('[Main] Both Ollama and OpenAI settings detected. Please configure only one.')
+        raise ValueError('Both Ollama and OpenAI settings are configured. Please set only one.')
+
     if settings.OLLAMA_API_HOST:
         Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
         Settings.llm = Ollama(base_url=settings.OLLAMA_URL, model="llama3", request_timeout=10000.0)
