@@ -27,6 +27,7 @@ services:
       - OLLAMA_API_PORT=${OLLAMA_API_PORT}
       - OLLAMA_CONTAINER_NAME=${OLLAMA_CONTAINER_NAME}
       - OLLAMA_SERVICE_NAME=${OLLAMA_SERVICE_NAME}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     networks:
       - main-bridge
 

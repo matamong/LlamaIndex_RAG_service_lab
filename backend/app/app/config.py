@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     OLLAMA_CONTAINER_NAME: str
     OLLAMA_SERVICE_NAME: str
 
+    # ChatGPT
+    OPENAI_API_KEY: str
+
+
     @property
     def OLLAMA_INFER_URL(self) -> str:
         return f'http://{self.OLLAMA_SERVICE_NAME}:{self.OLLAMA_API_PORT}/api/generate'
