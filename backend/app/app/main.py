@@ -17,15 +17,17 @@ logger = AppLogger().get_logger()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info('[Main] Setting up the app...')
-    # set up the LLM and Embedding models if the OLLAMA_API_HOST is set
-    logger.info('[Main] Set LLM and Embedding models.')
+    
     if settings.OLLAMA_API_HOST:
         Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
         Settings.llm = Ollama(base_url=settings.OLLAMA_URL, model="llama3", request_timeout=10000.0)
-    logger.info('[Main] App setup complete.')
-    # set up the gpt version if the OPENAI_API_KEY is set
-    if settings.OPENAI_API_KEY:
+        logger.info('[Main] Set Ollama LLM and HuggingFace Embedding models.')
+    elif settings.OPENAI_API_KEY:
         Settings.llm = OpenAI(model="gpt-4o")
+        logger.info('[Main] Set OpenAI GPT-4o model.')
+    
+    logger.info('[Main] App setup complete.')
+    
     yield
 
 app = FastAPI(lifespan=lifespan)
